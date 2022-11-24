@@ -10,14 +10,16 @@ def _main():
 		'-n','--name', help='name', default="notify-pipe")
 	parser.add_argument(
 		'-i','--icon', help='icon ', default="")
-
+	parser.add_argument(
+		'-t','--timeout', help='timeout', default="5")
 	args = parser.parse_args()
 
 	Notify.init("notify-pipe")
 
 	name = args.name
-
+	timeout = args.timeout
 	Hello = Notify.Notification.new (name)
+	Hello.set_timeout(int(timeout) * 1000)
 	Hello.show()
 
 	lines_iterator = iter(sys.stdin.readline, b"")
